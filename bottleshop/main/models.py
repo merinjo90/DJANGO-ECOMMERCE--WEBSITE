@@ -1,6 +1,16 @@
 from django.db import models
 
 # Create your models here.
+
+
+# Banner
+class Banner(models.Model):
+    img=models.ImageField(upload_to="banner_img/")
+    alt_text=models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.alt_text
+
 #Category
 class Category(models.Model):
     title=models.CharField(max_length=100)
@@ -41,9 +51,18 @@ class Product(models.Model):
     slug=models.CharField(max_length=400)
     detail=models.TextField()
     specs=models.TextField()
-    price=models.PositiveIntegerField()
     category=models.ForeignKey(Category,on_delete=models.CASCADE)
     brand=models.ForeignKey(Brand,on_delete=models.CASCADE)
     color=models.ForeignKey(Color,on_delete=models.CASCADE)
     size=models.ForeignKey(Size,on_delete=models.CASCADE)
     status=models.BooleanField(default=True)
+
+#Prduct Attribute
+class ProductAttribute(models.Model):
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    color=models.ForeignKey(Color,on_delete=models.CASCADE)
+    size=models.ForeignKey(Size,on_delete=models.CASCADE)
+    price=models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+         return self.product.title
