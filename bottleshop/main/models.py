@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import mark_safe
 
 # Create your models here.
 
@@ -21,6 +22,9 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural='2. Categories'
+
+    def image_tag(self):
+        return mark_safe('<img src="%s" width="100" />' % (self.image.url))
 
     def __str__(self):
         return self.title
