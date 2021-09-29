@@ -48,6 +48,9 @@ class Color(models.Model):
     class Meta:
         verbose_name_plural='4. Colors'
 
+    def color_bg(self):
+        return mark_safe('<div style="width:30px; height:30px; background-color:%s" ></div>' % (self.color_code))
+
     def __str__(self):
         return self.title
 
