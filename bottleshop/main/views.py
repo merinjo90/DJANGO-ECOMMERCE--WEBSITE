@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Category
 
 # Create your views here.
 #Home
@@ -7,7 +8,8 @@ def home(request):
 
 #Category
 def category_list(request):
-    return render(request,'category_list.html')
+    data=Category.objects.all().order_by('-id')
+    return render(request,'category_list.html',{'data':data})
 
 
 
